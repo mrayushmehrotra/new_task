@@ -100,7 +100,7 @@ const Search = () => {
       {/* Category Dropdown */}
       <select
         onChange={(e) => setCategory(e.target.value)}
-        className="border-2 bg-gray-200 text-black border-stone-200 p-2 rounded ml-4"
+        className="border-2 bg-gray-30 text-black border-stone-600 rounded-full p-2  ml-4"
       >
         <option value="">All Categories</option>
         {categories.map((cat) => (

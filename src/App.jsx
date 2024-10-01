@@ -8,11 +8,13 @@ import {
 } from "./Redux/paginationSlice";
 import Search from "./components/Search";
 import "./components/CSS/Loader.css";
+import Logo from "../public/bannerNavbar.jpg";
 
 function App() {
   const dispatch = useDispatch();
   const { page, products, loading } = useSelector((state) => state.pagination);
-
+  const previous = "<";
+  const next = ">";
   // Fetch products when page number changes
   useEffect(() => {
     dispatch(fetchProducts(page));
@@ -28,15 +30,23 @@ function App() {
 
   return (
     <>
+      <img
+        className="h-[20vh]  top-0 w-full opacity-25 absolute z-[-2]"
+        src={Logo}
+        alt="banner"
+      />
+
       <Search />
 
       {loading ? (
         <div className="loader"></div>
       ) : (
-        <div>{products && <ProductCard products={products} />}</div>
+        <div className="p-16">
+          {products && <ProductCard products={products} />}
+        </div>
       )}
       <center>
-        <div className="flex items-center space-x-4 justify-center mt-4">
+        <div className="flex p-12 items-center space-x-4 justify-center mt-4">
           <button
             onClick={() => dispatch(decrementPage())}
             disabled={page === 1}
@@ -46,7 +56,7 @@ function App() {
                 : "bg-blue-500 hover:bg-blue-600"
             }`}
           >
-            Previous
+            {previous}
           </button>
 
           <span className="px-4 py-2 text-gray-700 bg-gray-200 rounded-md">
@@ -57,7 +67,7 @@ function App() {
             onClick={() => dispatch(incrementPage())}
             className="px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600"
           >
-            Next
+            {next}
           </button>
         </div>
       </center>
